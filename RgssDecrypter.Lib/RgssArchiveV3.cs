@@ -32,9 +32,10 @@ namespace RgssDecrypter.Lib
 
                     while (true)
                     {
-                        var fp = new RgssFilePointer();
-
-                        fp.Offset = ReadEncryptedInt(br, dKey);
+                        var fp = new RgssFilePointer
+                        {
+                            Offset = ReadEncryptedInt(br, dKey)
+                        };
                         if (fp.Offset == 0)
                             break;
 

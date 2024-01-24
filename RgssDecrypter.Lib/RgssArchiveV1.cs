@@ -31,13 +31,14 @@ namespace RgssDecrypter.Lib
 
                     while (fs.Length - fs.Position > 0)
                     {
-                        var fp = new RgssFilePointer();
-
-                        fp.Source = this;
-                        fp.Name = ReadEncryptedString(br, dKey);
-                        fp.Size = ReadEncryptedInt(br, dKey);
-                        fp.Offset = fs.Position;
-                        fp.Key = dKey.Current();
+                        var fp = new RgssFilePointer
+                        {
+                            Source = this,
+                            Name = ReadEncryptedString(br, dKey),
+                            Size = ReadEncryptedInt(br, dKey),
+                            Offset = fs.Position,
+                            Key = dKey.Current()
+                        };
                         fs.Position += fp.Size;
 
                         FilePointers.Add(fp);
