@@ -421,8 +421,7 @@ namespace RgssDecrypter.Options
                 return true;
             }
 
-            string f, n, s, v;
-            if (!GetOptionParts(argument, out f, out n, out s, out v))
+            if (!GetOptionParts(argument, out string f, out string n, out string s, out string v))
                 return false;
 
             Option p;
@@ -497,8 +496,7 @@ namespace RgssDecrypter.Options
         {
             foreach (ArgumentSource source in _sources)
             {
-                IEnumerable<string> replacement;
-                if (!source.GetArguments(argument, out replacement))
+                if (!source.GetArguments(argument, out IEnumerable<string> replacement))
                     continue;
                 ae.Add(replacement);
                 return true;

@@ -143,8 +143,7 @@ namespace RgssDecrypter
                 Console.WriteLine("\x1B[32mRegistered Shell Extension\x1B[39m");
             }
 
-            RgssArchive archive;
-            if (!TryOpenArchive(args, out archive))
+            if (!TryOpenArchive(args, out RgssArchive archive))
                 return;
 
             var baseDir = Path.GetDirectoryName(args.RgssArchive);
