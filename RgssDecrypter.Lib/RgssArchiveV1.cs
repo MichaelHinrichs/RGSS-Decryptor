@@ -11,39 +11,35 @@ namespace RgssDecrypter.Lib
     {
         public RgssArchiveV1(string path) : base(path)
         {
-            using (var fs = File.OpenRead(path))
+            using var fs = File.OpenRead(path);
+            switch (CheckVersion(path, 1))
             {
-                switch (CheckVersion(path, 1))
-                {
-                    case -1:
-                        throw new InvalidDataException("Invalid RGSS Data");
-                    case 0:
-                        throw new InvalidDataException("Invalid RGSSAD Version");
-                    case 1:
-                    default:
-                        break;
-                }
-                using (var br = new BinaryReader(fs))
-                {
-                    fs.Position = 8;
-                    var dKey = new RgssDecryptionKey(7, 3);
-                    dKey.PushState(0xDEADCAFE);
+                case -1:
+                    throw new InvalidDataException("Invalid RGSS Data");
+                case 0:
+                    throw new InvalidDataException("Invalid RGSSAD Version");
+                case 1:
+                default:
+                    break;
+            }
+            using var br = new BinaryReader(fs);
+            fs.Position = 8;
+            var dKey = new RgssDecryptionKey(7, 3);
+            dKey.PushState(0xDEADCAFE);
 
-                    while (fs.Length - fs.Position > 0)
-                    {
-                        var fp = new RgssFilePointer
-                        {
-                            Source = this,
-                            Name = ReadEncryptedString(br, dKey),
-                            Size = ReadEncryptedInt(br, dKey),
-                            Offset = fs.Position,
-                            Key = dKey.Current()
-                        };
-                        fs.Position += fp.Size;
+            while (fs.Length - fs.Position > 0)
+            {
+                var fp = new RgssFilePointer
+                {
+                    Source = this,
+                    Name = ReadEncryptedString(br, dKey),
+                    Size = ReadEncryptedInt(br, dKey),
+                    Offset = fs.Position,
+                    Key = dKey.Current()
+                };
+                fs.Position += fp.Size;
 
-                        FilePointers.Add(fp);
-                    }
-                }
+                FilePointers.Add(fp);
             }
         }
 

@@ -123,9 +123,9 @@ namespace RgssDecrypter
                 var targetDir = Path.GetDirectoryName(targetPath);
                 Directory.CreateDirectory(targetDir);
 
-                using (var ps = RgssArchive.GetFile(pointer))
-                using (var fs = File.Create(targetPath))
-                    CopyStream(ps, fs);
+                using var ps = RgssArchive.GetFile(pointer);
+                using var fs = File.Create(targetPath);
+                CopyStream(ps, fs);
             }
         }
 

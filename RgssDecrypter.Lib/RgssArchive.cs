@@ -38,14 +38,12 @@ namespace RgssDecrypter.Lib
         {
             if (!File.Exists(path))
                 return -1;
-            using (var fs = File.OpenRead(path))
-            {
-                byte[] magic = new byte[8];
-                fs.Read(magic, 0, 8);
-                return Encoding.ASCII.GetString(magic, 0, 6) != "RGSSAD"
-                           ? -1
-                           : magic[7];
-            }
+            using var fs = File.OpenRead(path);
+            byte[] magic = new byte[8];
+            fs.Read(magic, 0, 8);
+            return Encoding.ASCII.GetString(magic, 0, 6) != "RGSSAD"
+                       ? -1
+                       : magic[7];
         }
 
         public List<RgssFilePointer> FilePointers { get; }

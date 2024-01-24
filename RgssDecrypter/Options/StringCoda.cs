@@ -30,33 +30,31 @@ namespace RgssDecrypter.Options
                 yield return string.Empty;
                 yield break;
             }
-            using (IEnumerator<int> ewidths = widths.GetEnumerator())
+            using IEnumerator<int> ewidths = widths.GetEnumerator();
+            bool? hw = null;
+            int width = GetNextWidth(ewidths, int.MaxValue, ref hw);
+            int start = 0, end;
+            do
             {
-                bool? hw = null;
-                int width = GetNextWidth(ewidths, int.MaxValue, ref hw);
-                int start = 0, end;
-                do
+                end = GetLineEnd(start, width, self);
+                char c = self[end - 1];
+                if (char.IsWhiteSpace(c))
+                    --end;
+                bool needContinuation = end != self.Length && !IsEolChar(c);
+                string continuation = "";
+                if (needContinuation)
                 {
-                    end = GetLineEnd(start, width, self);
-                    char c = self[end - 1];
-                    if (char.IsWhiteSpace(c))
-                        --end;
-                    bool needContinuation = end != self.Length && !IsEolChar(c);
-                    string continuation = "";
-                    if (needContinuation)
-                    {
-                        --end;
-                        continuation = "-";
-                    }
-                    string line = self.Substring(start, end - start) + continuation;
-                    yield return line;
-                    start = end;
-                    if (char.IsWhiteSpace(c))
-                        ++start;
-                    width = GetNextWidth(ewidths, width, ref hw);
+                    --end;
+                    continuation = "-";
                 }
-                while (start < self.Length);
+                string line = self.Substring(start, end - start) + continuation;
+                yield return line;
+                start = end;
+                if (char.IsWhiteSpace(c))
+                    ++start;
+                width = GetNextWidth(ewidths, width, ref hw);
             }
+            while (start < self.Length);
         }
 
         private static int GetLineEnd(int start, int length, string description)
