@@ -682,9 +682,7 @@ namespace RgssDecrypter.Options
                 bool hidden)
                 : base(prototype, description, count, hidden)
             {
-                if (action == null)
-                    throw new ArgumentNullException(nameof(action));
-                _action = action;
+                _action = action ?? throw new ArgumentNullException(nameof(action));
             }
 
             protected override void OnParseComplete(OptionContext c)
@@ -700,9 +698,7 @@ namespace RgssDecrypter.Options
             public ActionOption(string prototype, string description, Action<T> action)
                 : base(prototype, description, 1)
             {
-                if (action == null)
-                    throw new ArgumentNullException(nameof(action));
-                _action = action;
+                _action = action ?? throw new ArgumentNullException(nameof(action));
             }
 
             protected override void OnParseComplete(OptionContext c)
@@ -718,9 +714,7 @@ namespace RgssDecrypter.Options
             public ActionOption(string prototype, string description, OptionAction<TKey, TValue> action)
                 : base(prototype, description, 2)
             {
-                if (action == null)
-                    throw new ArgumentNullException(nameof(action));
-                _action = action;
+                _action = action ?? throw new ArgumentNullException(nameof(action));
             }
 
             protected override void OnParseComplete(OptionContext c)
