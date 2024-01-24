@@ -1,5 +1,3 @@
-using System;
-
 namespace RgssDecrypter
 {
     public class ProgramArguments
