@@ -150,9 +150,8 @@ namespace RgssDecrypter
             var outDir = Path.Combine(baseDir, args.OutputDir);
 
             if (args.InfoDump)
-            {
                 DumpInfo(archive);
-            } else
+            else
             {
                 ExtractFiles(archive, outDir, args.SupressOutput);
                 if (args.CreateProjectFile)

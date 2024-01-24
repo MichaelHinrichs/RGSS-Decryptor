@@ -63,22 +63,16 @@ namespace RgssDecrypter.AnsiEscapeSequencer.Modules
             {
                 // Foreground
                 if (param >= 30 && param <= 37)
-                {
                     SetForeColor((byte) (param - 30), false);
-                }
                 else if (param >= 90 && param <= 97)
-                {
                     SetForeColor((byte) (param - 90), true);
-                }
+
                 // Foreground
                 else if (param >= 40 && param <= 47)
-                {
                     SetBackColor((byte) (param - 40), false);
-                }
                 else if (param >= 100 && param <= 107)
-                {
                     SetBackColor((byte) (param - 100), true);
-                }
+
                 else
                 {
                     switch (param)

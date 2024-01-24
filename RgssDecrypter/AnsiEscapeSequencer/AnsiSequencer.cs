@@ -103,9 +103,7 @@ namespace RgssDecrypter.AnsiEscapeSequencer
                         _escapeBuffer.Length = 0;
                     }
                     else
-                    {
                         _consoleOut.Write(value);
-                    }
                     break;
                 }
                 case States.Escape:
@@ -117,17 +115,13 @@ namespace RgssDecrypter.AnsiEscapeSequencer
                         _state = States.Text;
                     }
                     else
-                    {
                         _state = States.Code;
-                    }
                     break;
                 }
                 case States.Code:
                 {
                     if ((value >= '0' && value <= '9') || value == CODE_SEPARATOR)
-                    {
                         _escapeBuffer.Append(value);
-                    }
                     else
                     {
                         _state = States.Text;

@@ -59,9 +59,7 @@ namespace RgssDecrypter.Options
             {
                 int start, j = 0;
                 do
-                {
                     start = description.IndexOf(nameStart[i], j, StringComparison.Ordinal);
-                }
                 while (start >= 0 && j != 0 && description[j++ - 1] == '{');
                 if (start == -1)
                     continue;
@@ -128,9 +126,8 @@ namespace RgssDecrypter.Options
         private static int GetNextOptionIndex(string[] names, int i)
         {
             while (i < names.Length && names[i] == "<>")
-            {
                 ++i;
-            }
+
             return i;
         }
 
@@ -457,9 +454,7 @@ namespace RgssDecrypter.Options
             base.RemoveItem(index);
             // KeyedCollection.RemoveItem() handles the 0th item
             for (int i = 1; i < p.Names.Length; ++i)
-            {
                 Dictionary.Remove(p.Names[i]);
-            }
         }
 
         protected override void SetItem(int index, Option item)
@@ -630,21 +625,17 @@ namespace RgssDecrypter.Options
                 p.OptionValueType == OptionValueType.Required)
             {
                 if (p.OptionValueType == OptionValueType.Optional)
-                {
                     Write(o, ref written, MessageLocalizer("["));
-                }
+
                 Write(o, ref written, MessageLocalizer("=" + GetArgumentName(0, p.MaxValueCount, p.Description)));
                 string sep = p.ValueSeparators != null && p.ValueSeparators.Length > 0
                                  ? p.ValueSeparators[0]
                                  : " ";
                 for (int c = 1; c < p.MaxValueCount; ++c)
-                {
                     Write(o, ref written, MessageLocalizer(sep + GetArgumentName(c, p.MaxValueCount, p.Description)));
-                }
+
                 if (p.OptionValueType == OptionValueType.Optional)
-                {
                     Write(o, ref written, MessageLocalizer("]"));
-                }
             }
             return true;
         }

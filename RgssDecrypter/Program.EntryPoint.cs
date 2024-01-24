@@ -74,16 +74,16 @@ namespace RgssDecrypter
                 arg =>
                 {
                     var m = OptionSet.ValueOptionRegex.Match(arg);
-                    if (m.Success) {
+                    if (m.Success)
+                    {
                         PrintInvalid(m.Groups["name"].Value);
                         Environment.Exit(1);
-                    } else if (File.Exists(arg)) {
-                        argsObj.RgssArchive = arg;
-                    } else {
-                        unparsed.Add(arg);
                     }
-                }
-                );
+                    else if (File.Exists(arg))
+                        argsObj.RgssArchive = arg;
+                    else
+                        unparsed.Add(arg);
+                });
 
             opts.Add("?|help",
                 "Displays this help message",
