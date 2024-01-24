@@ -177,7 +177,7 @@ namespace RgssDecrypter.Options
                             tt.GetGenericTypeDefinition() == typeof(Nullable<>);
             Type targetType = nullable ? tt.GetGenericArguments()[0] : typeof(T);
             TypeConverter conv = TypeDescriptor.GetConverter(targetType);
-            T t = default(T);
+            T t = default;
             try
             {
                 if (value != null)
