@@ -297,8 +297,7 @@ namespace RgssDecrypter.Options
 
                 if (p.Hidden)
                     continue;
-
-                if (p is Category c)
+                if (p is Category)
                 {
                     WriteDescription(o, p.Description, "", 80, 80);
                     continue;
