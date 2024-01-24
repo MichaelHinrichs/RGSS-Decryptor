@@ -9,7 +9,7 @@ namespace RgssDecrypter
         public string OutputDir { get; set; } = ".";
 
         public bool RegisterContext { get; set; } = false;
-        public string RgssArchive { get; set; } = String.Empty;
+        public string RgssArchive { get; set; } = string.Empty;
         public bool UnregisterContext { get; set; } = false;
         public bool SupressOutput { get; set; } = false;
     }
