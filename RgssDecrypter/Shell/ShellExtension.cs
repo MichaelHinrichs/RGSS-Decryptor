@@ -6,7 +6,6 @@ using System;
 using System.Reflection;
 
 using Microsoft.Win32;
-using RgssDecrypter.Options;
 
 namespace RgssDecrypter.Shell
 {

@@ -7,8 +7,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-using RgssDecrypter.AnsiEscapeSequencer.Modules;
-
 namespace RgssDecrypter.AnsiEscapeSequencer
 {
     public class AnsiSequencer : TextWriter
